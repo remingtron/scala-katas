@@ -44,7 +44,7 @@ class CheckWriterSpec extends org.scalatest.path.FunSpec with Matchers {
       checkWriter.convertAmount(1.09).shouldBe("one dollar and 09/100")
     }
 
-    it("converts teens correctly") {
+    it("converts up to twenty correctly") {
       checkWriter.convertAmount(10.00).shouldBe("ten dollars and 00/100")
       checkWriter.convertAmount(11.00).shouldBe("eleven dollars and 00/100")
       checkWriter.convertAmount(12.00).shouldBe("twelve dollars and 00/100")
@@ -55,6 +55,11 @@ class CheckWriterSpec extends org.scalatest.path.FunSpec with Matchers {
       checkWriter.convertAmount(17.00).shouldBe("seventeen dollars and 00/100")
       checkWriter.convertAmount(18.00).shouldBe("eighteen dollars and 00/100")
       checkWriter.convertAmount(19.00).shouldBe("nineteen dollars and 00/100")
+      checkWriter.convertAmount(20.00).shouldBe("twenty dollars and 00/100")
+    }
+
+    it("converts 21 correctly") {
+      checkWriter.convertAmount(21.00).shouldBe("twenty-one dollars and 00/100")
     }
 
   }

@@ -1,9 +1,18 @@
 package check_writing
 
+import scala.collection.immutable.TreeMap
+
 class CheckWriter {
 
   def convertAmount(amount: Double) = {
-    Map(1 -> "one",
+    convertToString(amount.floor.toInt) +
+      " dollar" + (if (amount.floor == 1) "" else "s") +
+      " and " +
+      "%02d".format(((amount - amount.floor) * 100).toInt) + "/100"
+  }
+
+  def convertToString(amount: Int) = {
+    val conversions = TreeMap(1 -> "one",
       2 -> "two",
       3 -> "three",
       4 -> "four",
@@ -21,10 +30,13 @@ class CheckWriter {
       16 -> "sixteen",
       17 -> "seventeen",
       18 -> "eighteen",
-      19 -> "nineteen").get(amount.floor.toInt).get +
-      " dollar" + (if (amount.floor == 1) "" else "s") +
-      " and " +
-      "%02d".format(((amount - amount.floor) * 100).toInt) + "/100"
+      19 -> "nineteen",
+      20 -> "twenty")
+
+    var pieces = List[String]()
+    while (amount > 0) {
+    }
+
   }
 
 }
